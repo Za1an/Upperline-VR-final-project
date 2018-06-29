@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tower Escape</title>
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.min.js"></script>
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/archilogic-com/aframe-gblock/6498b71d/dist/gblock.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
+</head>
+
+<body>
+    <a-scene>
+        <a-assets>
+            <!--bed-->
+            <a-asset-item id="bed" src="images/bed.obj"></a-asset-item>
+            <a-asset-item id="bedmtl" src="images/bed.mtl"></a-asset-item>
+            <!--moon-->
+            <a-asset-item id="moon" src="images/moon.obj"></a-asset-item>
+            <a-asset-item id="moonmtl" src="images/moon.mtl"></a-asset-item>
+            <img src="images/moon.jpg" id="mooning">
+            <!--textures-->
+            <img src="images/brickwall.jpg" id="wall">
+            <img src="images/roof.jpg" id="roof">
+            <img src="images/floor.jpg" id="floor">
+            <!--Music-->
+            <audio id="daMusic" src="images/music.mp3" preload="auto"></audio>
+            <!--Door -->
+            <a-asset-item src="images/wooden_door.obj" id="doorobj"></a-asset-item>
+            <a-asset-item src="images/wooden_door.mtl" id="doormtl"></a-asset-item>
+            <img src="images/tilewood.jpg" id="doorwood">
+            <!--Table-->
+            <a-assset-item src="images/table.obj" id="tableobj"></a-assset-item>
+            <a-assset-item src="images/table.mtl" id="tablemtl"></a-assset-item>
+            <!--Chairs-->
+            <a-asset-item src="images/chair.obj" id="chairobj"></a-asset-item>
+            <a-asset-item src="images/chair.mtl" id="chairmtl"></a-asset-item>
+            <!--Barrels-->
+            <a-asset-item src="images/Barrel.obj" id="barrelobj"></a-asset-item>
+            <a-asset-item src="images/Barrel.mtl" id="barrelmtl"></a-asset-item>
+            <!--Knight's armor-->
+            <a-asset-item src="images/knight.obj" id="knightobj"></a-asset-item>
+            <a-asset-item src="images/knight.mtl" id="knightmtl"></a-asset-item>
+            <!--cups-->
+            <a-asset-item src="images/cup.obj" id="cupobj"></a-asset-item>
+            <a-asset-item src="images/cup.mtl" id="cupmtl"></a-asset-item>
+            <!--Candles-->
+            <a-asset-item src="images/lantern2.obj" id="lanternobj"></a-asset-item>
+            <a-asset-item src="images/lantern2.mtl" id="lanternmtl"></a-asset-item>
+            <!--Ladders-->
+            <a-asset-item src="images/Ladder.obj" id="ladderobj"></a-asset-item>
+            <a-asset-item src="images/Ladder.mtl" id="laddermtl"></a-asset-item>
+            <!--Glass-->
+            <a-asset-item src="images/Glass.obj" id="glassobj"></a-asset-item>
+            <a-asset-item src="images/glass.mtl" id="glassmtl"></a-asset-item>
+            <!--skull-->
+            <a-asset-item src="images/Skull.obj" id="skullobj"></a-asset-item>
+            <a-asset-item src="images/Skull.mtl" id="skullmtl"></a-asset-item>
+        </a-assets>
+        <a-entity id="sky-entity">
+            <a-sky color="black"></a-sky>
+        </a-entity>
+        <a-sound src="src: url(images/music.mp3)" autoplay="true" volume=15 loop="true"></a-sound>
+        <a-sound src="src: url(images/introtowerescape.mp3)" autoplay="true" volume=80 loop="false"></a-sound>
+
+
+
+        <a-entity environment="preset: forest; groundColor: #493829; grid: cross seed: 245837; ground: flat; skyType: color; skyColor: black; groundYScale: 10"></a-entity>
+        <a-plane static-body position="0 -0.1 0" width="100000000" height="100000000" color="#445" rotation="-90 0 0"></a-plane>
+
+        <!--Walls-->
+        <a-box static-body position="0 27 0" height="48.5" width="15" depth="1" material="src: #wall; repeat: 20 20"></a-box>
+        <a-box static-body position="0 0 15" height="100" width="15" depth="1" material="src: #wall; repeat: 20 20"></a-box>
+        <a-box static-body position="7.5 0 7.5" rotation="0 90 0" height="100" width="15" depth="1" material="src: #wall; repeat: 20 40"></a-box>
+        <a-entity id="doorwall">
+            <a-box static-body position="-7.5 0 7.5" rotation="0 90 0" height="100" width="15" depth="1" material="src: #wall; repeat: 20 40"></a-box>
+        </a-entity>
+        <a-box static-body position="4 0 0" height="6" width="7" depth="1" material="src: #wall; repeat: 2 4" id="doorwall1"></a-box>
+        <a-box static-body position="-4 0 0" height="6" width="7" depth="1" material="src: #wall; repeat: 2 4" id="doorwall2"></a-box>
+
+
+
+        <!--door-->
+        <a-entity static-body obj-model="obj: #doorobj; mtl: #doormtl" scale="0.015 0.015 0.012" id="door"></a-entity>
+
+        <!--floors-->
+        <a-box static-body position="0 40 5.5" height="0.05" width="15" depth="11" material="src: #floor; repeat: 5 5"></a-box>
+        <a-box static-body position="2.5 40 12.5" height="0.05" width="14.5" depth="4" material="src: #floor; repeat: 5 5"></a-box>
+        <a-box static-body="" position="-5.5 40 13" height="0.05" width="3" depth="4" material="src: #floor; repeat: 5 5" rotation="" scale="" visible="" geometry="" id="trapdoor1"></a-box>
+        <a-box static-body="" position="0 20 9.5" height="0.05" width="14" depth="10.5" material="src: #floor; repeat: 5 5" rotation="" scale="" visible="" geometry=""></a-box>
+        <a-box static-body="" position="-2 20 2.5" height="0.05" width="12.5" depth="3.5" material="src: #floor; repeat: 5 5" rotation="" scale="" visible="" geometry=""></a-box>
+        <a-box static-body position="5.5 20 2.5" height="0.05" width="3" depth="3.5" material="src: #floor; repeat: 5 5" rotation="" scale="" visible="" geometry="" id="trapdoor2"></a-box>
+        <a-box static-body position="0 0.01 7.5" height="0.05" width="15" depth="15" material="src: #floor; repeat: 5 5"></a-box>
+
+        <a-box static-body position="0 -20 0" height="10" width='100' depth="100"></a-box>
+
+        <!--roof-->
+        <a-cone static-body position=" 0 55 8" height="10" width="500" radius-bottom="13" material="src: #roof; repeat: 20 40"></a-cone>
+
+        <!--Moon-->
+        <a-entity static-body obj-model="obj:#moon; mtl: #moonmtl" position="30 50 30" scale="0.1 0.1 0.1">
+            <a-light intensity="2"></a-light>
+        </a-entity>
+
+
+        <!--third floor models-->
+        <a-entity static-body obj-model="obj: #bed; mtl: #bedmtl" position="4 40.5 2" scale="30 30 30"></a-entity>
+        <a-entity static-body obj-model="obj: #tableobj; mtl: #tablemtl" scale="0.01 0.01 0.02" position="6 40.5 7"></a-entity>
+        <a-entity static-body obj-model="obj: #chairobj; mtl: #chairmtl" scale="0.2 0.2 0.2" position="4 40 14.75" rotation="0 180 0"></a-entity>
+        <a-entity static-body obj-model="obj: #chairobj; mtl: #chairmtl" scale="0.2 0.2 0.2" position="3 40 14.75" rotation="0 180 0"></a-entity>
+        <a-entity static-body obj-model="obj: #chairobj; mtl: #chairmtl" scale="0.2 0.2 0.2" position="2 40 14.75" rotation="0 180 0"></a-entity>
+        <a-entity static-body obj-model="obj: #chairobj; mtl: #chairmtl" scale="0.2 0.2 0.2" position="1 40.35 14.75" rotation="0 180 -90"></a-entity>
+        <a-entity static-body obj-model="obj: #barrelobj; mtl: #barrelmtl" scale="0.1 0.1 0.1" position="-4.3 40.1 2" rotation="0 90 0"></a-entity>
+        <a-entity static-body obj-model="obj: #barrelobj; mtl: #barrelmtl" scale="0.1 0.1 0.1" position="-4.9 40.1 5" rotation="0 108 0"></a-entity>
+        <a-entity static-body obj-model="obj: #knightobj; mtl: #knightmtl" scale="0.05 0.05 0.05" position=" -4.75 40 4.5" rotation="-90 90 0"></a-entity>
+        <a-entity static-body obj-model="obj: #cupobj; mtl: #cupmtl" scale="0.1 0.1 0.1" position=" 6 41.3 6" rotation="0 0 0"></a-entity>
+        <a-box static-body length="2" width="2" height="12" position="-6 46 14" material="src: #wall; repeat: 4 4" id="block1"></a-box>
+        <!--<a-entity obj-model="obj: #lanternobj; mtl: #lanternmtl" scale="1 1 1" position=" 6 43.5 3" rotation="0 0 0"></a-entity>-->
+        <a-entity id="candle">
+            <a-obj-model static-body src="#lanternobj" mtl="#lanternmtl" scale="1 1 1" position="6.6 41.3 7" rotation="5 50 -10"></a-obj-model>
+        </a-entity>
+        <a-text value="You're probably wondering why you're here. My name is Dephlon the Damned, and I own this tower. Don't question why or how you're here. If you cananswer my riddles, you are free to go. This is your first riddle: I'm tall when I am young, And I'm short when I am old. What am I?" position="-4 44 0.5" color="red"></a-text>
+         <a-text value="Impressive. This is your second riddle. A red house is made of red bricks, a blue house is made of blue bricks, and a purple house is made of purple bricks. What is a green house made of?" position="-4 24 0.5" color="red"></a-text>
+
+        <!--Ladders from 3rd to 2nd floor-->
+        <a-entity static-body obj-model="obj: #ladderobj" scale="0.2 0.6 0.2" color="brown" position="-6 40 14.2" rotation="0 180 0"></a-entity>
+        <a-entity static-body obj-model="obj: #ladderobj" scale="0.2 0.6 0.2" color="brown" position="-6 35 14.2" rotation="0 180 0"></a-entity>
+        <a-entity static-body obj-model="obj: #ladderobj" scale="0.2 0.6 0.2" color="brown" position="-6 30 14.2" rotation="0 180 0"></a-entity>
+        <a-entity static-body obj-model="obj: #ladderobj" scale="0.2 0.6 0.2" color="brown" position="-6 25 14.2" rotation="0 180 0"></a-entity>
+        <a-entity static-body obj-model="obj: #ladderobj" scale="0.2 0.6 0.2" color="brown" position="-6 22.5 14.2" rotation="0 180 0"></a-entity>
+
+        <!--Second floor models-->
+        <a-entity static-body obj-model="obj: #knightobj; mtl: #knightmtl" scale="0.05 0.05 0.05" position=" -4.75 20 4.5" rotation="-90 90 0"></a-entity>
+        <a-entity static-body obj-model="obj: #tableobj; mtl: #tablemtl" scale="0.01 0.02 0.035" position="0 20.85 8" rotation="0 0 -90"></a-entity>
+        <a-entity static-body obj-model="obj: #cupobj; mtl: #cupmtl" scale="0.1 0.1 0.1" position=" 3 20.25 4.7" rotation="0 -57 -90"></a-entity>
+        <a-entity static-body obj-model="obj: #cupobj; mtl: #cupmtl" scale="0.1 0.1 0.1" position=" 1.7 20.25 8" rotation="0 43 -90"></a-entity>
+        <a-entity id="glass">
+            <a-obj-model src="#glassobj" scale="0.1 0.1 0.1" position=" 2.6 20.15 10.1" rotation="0 -35 -80" opacity="0.6" color="skyblue"></a-obj-model>
+        </a-entity>
+        <a-entity static-body="" obj-model="obj: #chairobj; mtl: #chairmtl" scale="0.2 0.2 0.2" position="-3 20 9.5" rotation="0 90 0" visible=""></a-entity>
+        <a-entity static-body obj-model="obj: #chairobj; mtl: #chairmtl" scale="0.2 0.2 0.2" position="-3 20 7" rotation="0 90 0" visible=""></a-entity>
+        <a-entity static-body="" obj-model="obj: #chairobj; mtl: #chairmtl" scale="0.2 0.2 0.2" position="-3 20 5.5" rotation="0 90 0" visible=""></a-entity>
+        <a-box static-body length="2" width="2" height="12" position="6.5 20 1" material="src: #wall; repeat: 4 4" id="block2"></a-box>
+        <a-entity static-body gblock="https://poly.google.com/view/0ZPgakRR11-" scale="2 2 2" position="0 19.7 4.7" rotation="0 0 0" id="skull"></a-entity>
+        <a-entity static-body gblock="https://poly.google.com/view/0-_UGETLPsX" scale="2 2 2" position="7.2 23.4 5" rotation="180 180 0" id="skull"></a-entity>
+
+
+        <!--Ladders from 2nd to 1st floor-->
+        <a-entity static-body obj-model="obj: #ladderobj" scale="0.2 0.6 0.2" color="brown" position="6.5 20 0.5" rotation="0 0 0"></a-entity>
+        <a-entity static-body obj-model="obj: #ladderobj" scale="0.2 0.6 0.2" color="brown" position="6.5 15 0.5" rotation="0 0 0"></a-entity>
+        <a-entity static-body obj-model="obj: #ladderobj" scale="0.2 0.6 0.2" color="brown" position="6.5 10 0.5" rotation="0 0 0"></a-entity>
+        <a-entity static-body obj-model="obj: #ladderobj" scale="0.2 0.6 0.2" color="brown" position="6.5 5 0.5" rotation="0 0 0"></a-entity>
+        <a-entity static-body obj-model="obj: #ladderobj" scale="0.2 0.6 0.2" color="brown" position="6.5 2.5 0.5" rotation="0 0 0"></a-entity>
+
+        <!--First Floor-->
+        <a-entity static-body obj-model="obj: #tableobj; mtl: #tablemtl" scale="0.01 0.01 0.02" position="6 0.5 7"></a-entity>
+        
+        <a-entity static-body obj-model="obj: #chairobj; mtl: #chairmtl" scale="0.2 0.2 0.2" position="4 0 14.75" rotation="0 180 0"></a-entity>
+        <a-entity static-body obj-model="obj: #chairobj; mtl: #chairmtl" scale="0.2 0.2 0.2" position="3 0 14.75" rotation="0 180 0"></a-entity>
+        <a-entity static-body obj-model="obj: #chairobj; mtl: #chairmtl" scale="0.2 0.2 0.2" position="2 0 14.75" rotation="0 180 0"></a-entity>
+        <a-entity static-body obj-model="obj: #chairobj; mtl: #chairmtl" scale="0.2 0.2 0.2" position="1 0.35 14.75" rotation="0 180 -90"></a-entity>
+        <!--<a-entity obj-model="obj: #barrelobj; mtl: #barrelmtl" scale="0.1 0.1 0.1" position="-4.9 40.1 4" rotation="0 90 0"></a-entity>-->
+        <a-entity static-body obj-model="obj: #barrelobj; mtl: #barrelmtl" scale="0.1 0.1 0.1" position="-4.9 0.1 11" rotation="0 107 0"></a-entity>
+        <a-entity static-body obj-model="obj: #cupobj; mtl: #cupmtl" scale="0.1 0.1 0.1" position=" 6 41.3 6" rotation="0 0 0"></a-entity>
+        <!--<a-entity obj-model="obj: #lanternobj; mtl: #lanternmtl" scale="1 1 1" position=" 6 43.5 3" rotation="0 0 0"></a-entity>-->
+        <a-entity static-body obj-model="obj: #knightobj; mtl: #knightmtl" scale="0.05 0.05 0.05" position=" -4.75 0 4.5" rotation="-90 90 0"></a-entity>
+        <a-entity static-body obj-model="obj: #tableobj; mtl: #tablemtl" scale="0.01 0.02 0.035" position="-5 4 2.2" rotation="80 -40 -60"></a-entity>
+        <a-entity static-body obj-model="obj: #cupobj; mtl: #cupmtl" scale="0.1 0.1 0.1" position=" 1.7 0.25 8" rotation="0 43 -90"></a-entity>
+        <a-entity static-body="" obj-model="obj: #chairobj; mtl: #chairmtl" scale="0.2 0.2 0.2" position="-3 0 9.5" rotation="0 90 0" visible=""></a-entity>
+        <a-entity static-body obj-model="obj: #chairobj; mtl: #chairmtl" scale="0.2 0.2 0.2" position="-3 0 7" rotation="0 90 0" visible=""></a-entity>
+        <a-entity static-body="" obj-model="obj: #chairobj; mtl: #chairmtl" scale="0.2 0.2 0.2" position="-2 1.4 5.5" rotation="90 90 90" visible=""></a-entity>
+        <a-entity static-body gblock="https://poly.google.com/view/4wdAFuFNU2-" scale="2 2 2" position="6.8 -1.5 7" rotation="0 90 0"></a-entity>
+        <a-entity static-body gblock="https://poly.google.com/view/4wdAFuFNU2-" scale="3 3 3" position="6.8 -3 8" rotation="0 45 0"></a-entity>
+        <a-entity static-body gblock="https://poly.google.com/view/4wdAFuFNU2-" scale="3 3 3" position="6.9 -3 6" rotation="0 -215 0"></a-entity>
+        <a-entity static-body gblock="https://poly.google.com/view/0uAT6KkcOJy" scale="1 1 1" position="5.9 1.05 5.8" rotation="85 10 20"></a-entity>
+        <a-entity id="skull">
+            <a-obj-model static-body gblock="https://poly.google.com/view/11frtdTnbRC" scale="2 2 2" position="5.8 -1 5.8" rotation="0 0 0"></a-obj-model>
+        </a-entity>
+        
+
+
+
+        <!--Make a player/camera entity, and give it the attributes we need it to have in order control camera with mouse, movement with WASD, and jump with spacebar-->
+        <a-entity class="player" id="player" camera jump-ability universal-controls kinematic-body position="0 42 4" rotation="0 180 0">
+            <a-entity cursor raycaster="far: infinity" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: black; shader: flat">
+            </a-entity>
+        </a-entity>
+    </a-scene>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
+
+</html>
